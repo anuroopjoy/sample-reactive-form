@@ -91,6 +91,14 @@ export class FormComponent implements OnInit {
       console.log(this.personalForm.value);
       this.personalForm.markAsPristine();
       this.personalForm.markAsUntouched();
+    } else {
+      if (this.personalForm.hasError('locationAge')) {
+        const errors = this.personalForm.getError('locationAge');
+        console.log(errors);
+        alert(
+          `The age should be between 17 and 100 for the state of Kerala. Entered age is ${errors.age}`
+        );
+      }
     }
   }
 
