@@ -1,0 +1,25 @@
+<span *ngIf="control?.valid" class="badge rounded-pill bg-primary">Valid</span>
+<span *ngIf="control?.invalid" class="badge rounded-pill bg-danger"
+  >Invalid</span
+>
+<span *ngIf="control?.pending" class="badge rounded-pill bg-secondary"
+  >Pending</span
+>
+<span *ngIf="control?.disabled" class="badge rounded-pill bg-dark"
+  >Disabled</span
+>
+<span *ngIf="control?.enabled" class="badge rounded-pill bg-success"
+  >Enabled</span
+>
+<span *ngIf="control?.pristine" class="badge rounded-pill bg-light text-dark"
+  >Pristine</span
+>
+<span *ngIf="control?.dirty" class="badge rounded-pill bg-dark">Dirty</span>
+<span *ngIf="control?.touched" class="badge rounded-pill bg-warning text-dark"
+  >Touched</span
+>
+<span *ngIf="control?.untouched" class="badge rounded-pill bg-info text-dark"
+  >UnTouched</span
+>
+
+<span *ngIf="control?.errors" style="color: red;">{{ control?.errors | json }}</span>

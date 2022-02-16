@@ -1,0 +1,159 @@
+<div class="container-fluid">
+  <form [formGroup]="personalForm" (ngSubmit)="submitForm()">
+    <div class="row g-3">
+      <div class="col-2">
+        <label> Name: </label>
+      </div>
+      <div class="col">
+        <input
+          type="text"
+          name="name"
+          placeholder="Name"
+          formControlName="name"
+        />
+        <app-status [control]="getControl('name')"></app-status>
+      </div>
+    </div>
+    <div class="row g-3">
+      <div class="col-2">
+        <label> Age: </label>
+      </div>
+      <div class="col">
+        <input type="text" name="age" placeholder="Age" formControlName="age" />
+        <app-status [control]="getControl('age')"></app-status>
+      </div>
+    </div>
+    <div class="row g-3">
+      <div class="col-2">
+        <label> Email: </label>
+      </div>
+      <div class="col">
+        <input
+          type="text"
+          name="email"
+          placeholder="Email"
+          formControlName="email"
+        />
+        <app-status [control]="getControl('email')"></app-status>
+      </div>
+    </div>
+    <div formGroupName="address">
+      <h4>Address</h4>
+      <app-status [control]="getControl('address')"></app-status>
+      <div class="row g-3">
+        <div class="col-2">
+          <label>Street: </label>
+        </div>
+        <div class="col">
+          <input
+            type="text"
+            name="street"
+            placeholder="Street"
+            formControlName="street"
+          />
+          <app-status [control]="getControl('address.street')"></app-status>
+        </div>
+      </div>
+      <div class="row g-3">
+        <div class="col-2">
+          <label>City: </label>
+        </div>
+        <div class="col">
+          <input
+            type="text"
+            name="city"
+            placeholder="City"
+            formControlName="city"
+          />
+          <app-status [control]="getControl('address.city')"></app-status>
+        </div>
+      </div>
+      <div class="row g-3">
+        <div class="col-2">
+          <label>State: </label>
+        </div>
+        <div class="col">
+          <input
+            type="text"
+            name="state"
+            placeholder="State"
+            formControlName="state"
+          />
+          <app-status [control]="getControl('address.state')"></app-status>
+        </div>
+      </div>
+      <div class="row g-3">
+        <div class="col-2">
+          <label>Zip Code: </label>
+        </div>
+        <div class="col">
+          <input
+            type="text"
+            name="zip"
+            placeholder="Zip"
+            formControlName="zip"
+          />
+          <app-status [control]="getControl('address.zip')"></app-status>
+        </div>
+      </div>
+    </div>
+    <div formArrayName="hobbies">
+      <h4>Hobbies</h4>
+      <button
+        type="button"
+        class="btn btn-primary mb-3"
+        (click)="addHobby()"
+        type="button"
+      >
+        + Add hobby
+      </button>
+
+      <div
+        *ngFor="let hobby of hobbies.controls; let i = index"
+        class="row g-3"
+      >
+        <div class="col-2">
+          <label>Hobby:</label>
+        </div>
+        <div class="col">
+          <input
+            name="hobby-{{ i }}"
+            placeholder="Hobby"
+            type="text"
+            [formControlName]="i"
+          />
+          <app-status [control]="$any(hobby)"></app-status>
+        </div>
+      </div>
+    </div>
+    <div class="row g-3">
+      <div class="col-2">
+        <button
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="personalForm.invalid"
+        >
+          Submit
+        </button>
+      </div>
+      <div class="col-3">
+        <button (click)="resetForm()" class="btn btn-secondary">Reset</button>
+      </div>
+    </div>
+  </form>
+  <br />
+  <div class="row g-3">
+    <div class="col-3">
+      <button class="btn btn-primary" (click)="setValue()">Set Value</button>
+    </div>
+    <div class="col-3">
+      <button class="btn btn-primary" (click)="patchValue()">
+        Patch Value
+      </button>
+    </div>
+  </div>
+</div>
+Form value = {{ personalForm.value | json }}
+<br />
+Form status = {{ personalForm.status }}
+<app-status [control]="$any(personalForm)"></app-status>
