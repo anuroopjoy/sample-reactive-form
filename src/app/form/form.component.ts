@@ -6,6 +6,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { locationAgeValidator } from '../validators/location-age.validator';
 import { numericValidator } from '../validators/numeric.validator';
 
 @Component({
@@ -35,18 +36,21 @@ export class FormComponent implements OnInit {
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
-    this.personalForm = this.fb.group({
-      name: ['', Validators.required],
-      age: ['', [numericValidator(), Validators.max(100), Validators.min(0)]],
-      email: ['', [Validators.required, Validators.email]],
-      address: this.fb.group({
-        street: '',
-        city: '',
-        state: '',
-        zip: '',
-      }),
-      hobbies: this.fb.array([]),
-    });
+    this.personalForm = this.fb.group(
+      {
+        name: ['', Validators.required],
+        age: ['', [numericValidator(), Validators.max(100), Validators.min(0)]],
+        email: ['', [Validators.required, Validators.email]],
+        address: this.fb.group({
+          street: '',
+          city: '',
+          state: '',
+          zip: '',
+        }),
+        hobbies: this.fb.array([]),
+      },
+      { validators: locationAgeValidator }
+    );
   }
 
   setValue() {
