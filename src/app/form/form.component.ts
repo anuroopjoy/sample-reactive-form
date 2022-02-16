@@ -47,8 +47,8 @@ export class FormComponent implements OnInit {
           city: [
             '',
             {
-              // updateOn: 'submit',
-              updateOn: 'blur',
+              updateOn: 'submit',
+              // updateOn: 'blur',
               asyncValidators: [
                 this.cityValidator.validate.bind(this.cityValidator),
               ],
@@ -61,6 +61,15 @@ export class FormComponent implements OnInit {
       },
       { validators: locationAgeValidator }
     );
+
+    this.personalForm.valueChanges.subscribe((value) => {
+      console.log('value changes', value);
+    });
+    this.personalForm.statusChanges.subscribe((status) => {
+      console.log('status changes', status);
+    });
+    console.log(this.personalForm.updateOn);
+    console.log(this.personalForm.get('address.city')?.updateOn);
   }
 
   setValue() {
@@ -77,6 +86,7 @@ export class FormComponent implements OnInit {
       },
       hobbies: this.hobbies.value,
     });
+    // this.personalForm.get(['address', 'city'])?.markAsDirty({ onlySelf: true });
     // this.personalForm.get(['address', 'city'])?.markAsDirty();
     // setTimeout(() => {
     //   this.personalForm.get(['address', 'city'])?.markAsPristine();
@@ -114,6 +124,7 @@ export class FormComponent implements OnInit {
 
   resetForm() {
     this.personalForm.reset();
+    // this.personalForm.reset('', { emitEvent: false });
   }
 
   addHobby() {
@@ -122,5 +133,36 @@ export class FormComponent implements OnInit {
 
   getControl(controlName: string): FormControl {
     return this.personalForm.get(controlName) as FormControl;
+  }
+
+  changeValidators() {
+    // this.personalForm.clearValidators();
+    // this.personalForm.updateValueAndValidity();
+    // this.personalForm.get('address.city')?.clearAsyncValidators();
+    // this.personalForm.get('address.city')?.updateValueAndValidity();
+    if (
+      !this.personalForm.get('address.zip')?.hasValidator(Validators.required)
+    ) {
+      this.personalForm
+        .get('address.zip')
+        ?.addValidators([Validators.required]);
+      this.personalForm.get('address.zip')?.updateValueAndValidity();
+      setTimeout(() => {
+        this.personalForm
+          .get('address.zip')
+          ?.removeValidators([Validators.required]);
+        this.personalForm.get('address.zip')?.updateValueAndValidity();
+      }, 2000);
+    }
+    // this.personalForm.get('age')?.setValidators([Validators.required]);
+    // this.personalForm.get('age')?.updateValueAndValidity();
+  }
+
+  changeMode() {
+    if (this.personalForm.get('address')?.disabled) {
+      this.personalForm.get('address')?.enable();
+    } else {
+      this.personalForm.get('address')?.disable();
+    }
   }
 }

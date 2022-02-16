@@ -1,5 +1,6 @@
 <div class="container-fluid">
-  <form [formGroup]="personalForm" (ngSubmit)="submitForm()">
+  <!-- <form [formGroup]="personalForm" (ngSubmit)="submitForm()"> -->
+  <form [formGroup]="personalForm">
     <div class="row g-3">
       <div class="col-2">
         <label> Name: </label>
@@ -131,6 +132,7 @@
         <button
           type="submit"
           class="btn btn-primary"
+          (click)="submitForm()"
           >
           <!-- [disabled]="personalForm.invalid" -->
           Submit
@@ -138,6 +140,12 @@
       </div>
       <div class="col-3">
         <button (click)="resetForm()" class="btn btn-secondary">Reset</button>
+      </div>
+      <div class="col-3">
+        <button (click)="changeValidators()" class="btn btn-secondary">Modify Validators</button>
+      </div>
+      <div class="col-3">
+        <button (click)="changeMode()" class="btn btn-secondary">Enable/Disable</button>
       </div>
     </div>
   </form>
