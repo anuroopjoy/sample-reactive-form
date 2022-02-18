@@ -1,6 +1,5 @@
 <div class="container-fluid">
-  <!-- <form [formGroup]="personalForm" (ngSubmit)="submitForm()"> -->
-  <form [formGroup]="personalForm">
+  <form [formGroup]="personalForm" (ngSubmit)="submitForm()">
     <div class="row g-3">
       <div class="col-2">
         <label> Name: </label>
@@ -129,38 +128,39 @@
     </div>
     <div class="row g-3">
       <div class="col-2">
-        <button
-          type="submit"
-          class="btn btn-primary"
-          (click)="submitForm()"
-          >
+        <button type="submit" class="btn btn-primary">
           <!-- [disabled]="personalForm.invalid" -->
           Submit
         </button>
-      </div>
-      <div class="col-3">
-        <button (click)="resetForm()" class="btn btn-secondary">Reset</button>
-      </div>
-      <div class="col-3">
-        <button (click)="changeValidators()" class="btn btn-secondary">Modify Validators</button>
-      </div>
-      <div class="col-3">
-        <button (click)="changeMode()" class="btn btn-secondary">Enable/Disable</button>
       </div>
     </div>
   </form>
   <br />
   <div class="row g-3">
-    <div class="col-3">
+    <div class="col-2">
       <button class="btn btn-primary" (click)="setValue()">Set Value</button>
     </div>
-    <div class="col-3">
+    <div class="col-2">
       <button class="btn btn-primary" (click)="patchValue()">
         Patch Value
       </button>
     </div>
+    <div class="col-2">
+      <button (click)="resetForm()" class="btn btn-primary">Reset</button>
+    </div>
+    <div class="col-2">
+      <button (click)="changeValidators()" class="btn btn-primary">
+        Modify Validators
+      </button>
+    </div>
+    <div class="col-2">
+      <button (click)="changeMode()" class="btn btn-primary">
+        Enable/Disable
+      </button>
+    </div>
   </div>
 </div>
+<br />
 Form value = {{ personalForm.value | json }}
 <br />
 Form status = {{ personalForm.status }}
