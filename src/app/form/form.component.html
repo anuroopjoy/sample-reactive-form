@@ -100,14 +100,15 @@
     <div formArrayName="hobbies">
       <h4>Hobbies</h4>
       <button
-        type="button"
+      type="button"
         class="btn btn-primary mb-3"
         (click)="addHobby()"
         type="button"
-      >
+        >
         + Add hobby
       </button>
-
+      <app-status [control]="getControl('hobbies')"></app-status>
+      
       <div
         *ngFor="let hobby of hobbies.controls; let i = index"
         class="row g-3"
