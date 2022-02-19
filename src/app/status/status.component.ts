@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { AbstractControl } from '@angular/forms';
 
 @Component({
   selector: 'app-status',
@@ -7,7 +7,7 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./status.component.scss'],
 })
 export class StatusComponent implements OnInit {
-  @Input() control!: FormControl;
+  @Input() control!: AbstractControl;
   constructor() {}
 
   ngOnInit(): void {}
